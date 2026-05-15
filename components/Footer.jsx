@@ -32,7 +32,7 @@ const Footer = memo(() => {
                 jengeame
               </span>
             </Link>
-            <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            <p className="text-sm text-black dark:text-neutral-300 leading-relaxed">
               Full-stack digital agency delivering scalable web, mobile, and backend solutions for businesses across Africa and beyond.
             </p>
           </div>
@@ -45,7 +45,7 @@ const Footer = memo(() => {
                 <li key={link.to}>
                   <Link
                     href={link.to}
-                    className="text-sm text-neutral-600 dark:text-neutral-300 hover:text-primary transition-colors duration-200"
+                    className="text-sm text-black dark:text-neutral-300 hover:text-primary transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -58,15 +58,15 @@ const Footer = memo(() => {
           <div>
             <h3 className="text-sm font-semibold text-black dark:text-white mb-3 uppercase tracking-wide">Contact</h3>
             <ul className="space-y-2">
-              <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+              <li className="flex items-center gap-2 text-sm text-black dark:text-neutral-300">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
                 Nairobi, Kenya
               </li>
-              <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+              <li className="flex items-center gap-2 text-sm text-black dark:text-neutral-300">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
                 <a href="tel:+254757568845" className="hover:text-primary transition-colors">+254 0757 568845</a>
               </li>
-              <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+              <li className="flex items-center gap-2 text-sm text-black dark:text-neutral-300">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 <a href="mailto:simongatungo300@gmail.com" className="hover:text-primary transition-colors">
                   simongatungo300@gmail.com

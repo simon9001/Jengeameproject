@@ -34,11 +34,11 @@ const PricingCard = memo(({ tier }) => (
       <div className="flex items-baseline gap-1">
         <span className="text-3xl font-extrabold text-black dark:text-white">{tier.price}</span>
       </div>
-      <p className="text-sm text-neutral-700 dark:text-neutral-200 mt-2">{tier.desc}</p>
+      <p className="text-sm text-black dark:text-neutral-200 mt-2">{tier.desc}</p>
     </div>
     <ul className="space-y-3 mb-8 flex-grow">
       {tier.features.map((feature, i) => (
-        <li key={i} className="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-300">
+        <li key={i} className="flex items-start gap-3 text-sm text-neutral-900 dark:text-neutral-300">
           <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
           <span>{feature}</span>
         </li>
