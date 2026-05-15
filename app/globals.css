@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(32 54% 93%);
+  --color-foreground: hsl(0 0% 4%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(0 0% 4%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(0 0% 4%);
+  --color-primary: hsl(37 91% 55%);
+  --color-primary-foreground: hsl(0 0% 4%);
+  --color-secondary: hsl(166 30% 40%);
+  --color-secondary-foreground: hsl(0 0% 98%);
+  --color-muted: hsl(32 20% 92%);
+  --color-muted-foreground: hsl(0 0% 25%);
+  --color-accent: hsl(9 74% 86%);
+  --color-accent-foreground: hsl(9 74% 20%);
+  --color-destructive: hsl(1 80% 73%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  --color-border: hsl(32 20% 80%);
+  --color-input: hsl(32 20% 80%);
+  --color-ring: hsl(37 91% 67%);
+  --radius-xl: 1rem;
+}
+
+@layer base {
+  :root {
+    --background: 32 54% 93%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 37 91% 55%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 166 30% 40%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 32 20% 92%;
+    --muted-foreground: 0 0% 25%;
+    --accent: 9 74% 86%;
+    --accent-foreground: 9 74% 20%;
+    --destructive: 1 80% 73%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 32 20% 80%;
+    --input: 32 20% 80%;
+    --ring: 37 91% 67%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 0 0% 96%;
+    --card: 222 47% 10%;
+    --card-foreground: 0 0% 96%;
+    --popover: 222 47% 10%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 37 91% 67%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 166 20% 40%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 222 20% 12%;
+    --muted-foreground: 0 0% 75%;
+    --accent: 1 80% 73%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 1 80% 73%;
+    --destructive-foreground: 0 0% 96%;
+    --border: 222 20% 15%;
+    --input: 222 20% 15%;
+    --ring: 37 91% 67%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.card-interactive {
+  @apply transition-all duration-500 hover:shadow-2xl hover:-translate-y-2;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s infinite ease-in-out;
+}
