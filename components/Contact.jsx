@@ -91,11 +91,11 @@ function Contact() {
       >
         {/* Header */}
         <motion.div variants={itemVariants} className="flex flex-col items-center text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
-            <Mail className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">Let's Talk</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full skeu-badge mb-4">
+            <Mail className="w-4 h-4" />
+            <span className="text-sm font-semibold uppercase tracking-wide">Let's Talk</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">Get a Free Quote</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Get a Free Quote</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Tell us about your project and we'll get back to you within 24 hours with a tailored proposal. No obligation, no pressure.
           </p>
@@ -105,22 +105,22 @@ function Contact() {
           {/* Contact Info */}
           <motion.div variants={itemVariants} className="lg:col-span-2 flex flex-col gap-5">
             {CONTACT_INFO.map(({ icon: Icon, label, value, href }) => (
-              <div key={label} className="flex items-start gap-4 p-4 rounded-xl bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 shadow-sm">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+              <div key={label} className="skeu-card flex items-start gap-4 p-4">
+                <div className="w-10 h-10 rounded-lg skeu-icon-box flex items-center justify-center text-primary flex-shrink-0">
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-0.5">{label}</p>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-0.5">{label}</p>
                   {href ? (
-                    <a href={href} className="text-sm font-medium text-black dark:text-white hover:text-primary transition-colors">{value}</a>
+                    <a href={href} className="text-sm font-medium text-foreground hover:text-primary transition-colors">{value}</a>
                   ) : (
-                    <p className="text-sm font-medium text-black dark:text-white">{value}</p>
+                    <p className="text-sm font-medium text-foreground">{value}</p>
                   )}
                 </div>
               </div>
             ))}
 
-            <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
+            <div className="skeu-card p-4">
               <p className="text-sm text-primary font-medium">
                 🌍 Serving clients across Kenya, Africa, and globally — remote-friendly, deadline-driven.
               </p>
@@ -131,7 +131,7 @@ function Contact() {
           <motion.form
             onSubmit={handleSubmit}
             variants={formContainerVariants}
-            className="lg:col-span-3 p-6 sm:p-8 bg-white/90 dark:bg-neutral-900/80 border border-border/40 dark:border-border/60 rounded-2xl shadow space-y-4"
+            className="lg:col-span-3 skeu-card p-6 sm:p-8 space-y-4"
           >
             <input type="hidden" name="_subject" value="New Project Enquiry — Gatungo Digital" />
 
@@ -144,11 +144,11 @@ function Contact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <motion.div variants={itemVariants}>
                 <label className="block text-sm font-medium text-foreground mb-1.5">Full Name *</label>
-                <Input type="text" name="name" placeholder="John Doe" required disabled={formState.status === "loading"} className="text-foreground disabled:opacity-50" />
+                <Input type="text" name="name" placeholder="John Doe" required disabled={formState.status === "loading"} className="disabled:opacity-50" />
               </motion.div>
               <motion.div variants={itemVariants}>
                 <label className="block text-sm font-medium text-foreground mb-1.5">Email Address *</label>
-                <Input type="email" name="_replyto" placeholder="john@company.com" required disabled={formState.status === "loading"} className="text-foreground disabled:opacity-50" />
+                <Input type="email" name="_replyto" placeholder="john@company.com" required disabled={formState.status === "loading"} className="disabled:opacity-50" />
               </motion.div>
             </div>
 
@@ -159,15 +159,15 @@ function Contact() {
                   name="service"
                   required
                   disabled={formState.status === "loading"}
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 text-foreground"
+                  className="flex h-10 w-full rounded-lg skeu-input px-3 py-2 text-sm disabled:opacity-50"
                 >
                   <option value="">Select a service...</option>
                   <option value="Web Development">Web Development</option>
                   <option value="Mobile App">Mobile App (Flutter)</option>
-                  <option value="Backend / API">Backend & API Development</option>
+                  <option value="Backend / API">Backend &amp; API Development</option>
                   <option value="UI/UX Design">UI/UX Design</option>
-                  <option value="Database / Cloud">Database & Cloud</option>
-                  <option value="AI & Automation">AI & Automation</option>
+                  <option value="Database / Cloud">Database &amp; Cloud</option>
+                  <option value="AI & Automation">AI &amp; Automation</option>
                   <option value="Full Project">Full Project (End-to-End)</option>
                   <option value="Other">Other / Not Sure</option>
                 </select>
@@ -177,21 +177,21 @@ function Contact() {
                 <select
                   name="budget"
                   disabled={formState.status === "loading"}
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 text-foreground"
+                  className="flex h-10 w-full rounded-lg skeu-input px-3 py-2 text-sm disabled:opacity-50"
                 >
                   <option value="">Select budget range...</option>
                   <option value="Under $500">Under $500</option>
                   <option value="$500 – $2,000">$500 – $2,000</option>
                   <option value="$2,000 – $10,000">$2,000 – $10,000</option>
                   <option value="$10,000+">$10,000+</option>
-                  <option value="Let's discuss">Let's discuss</option>
+                  <option value="Let's discuss">Let&apos;s discuss</option>
                 </select>
               </motion.div>
             </div>
 
             <motion.div variants={itemVariants}>
               <label className="block text-sm font-medium text-foreground mb-1.5">Company / Organisation</label>
-              <Input type="text" name="company" placeholder="Your company name (optional)" disabled={formState.status === "loading"} className="text-foreground disabled:opacity-50" />
+              <Input type="text" name="company" placeholder="Your company name (optional)" disabled={formState.status === "loading"} className="disabled:opacity-50" />
             </motion.div>
 
             <motion.div variants={itemVariants}>
@@ -202,7 +202,7 @@ function Contact() {
                 placeholder="Describe your project, goals, timeline, and any specific requirements..."
                 required
                 disabled={formState.status === "loading"}
-                className="resize-y text-foreground disabled:opacity-50"
+                className="resize-y disabled:opacity-50"
               />
             </motion.div>
 
@@ -210,7 +210,7 @@ function Contact() {
               <Button
                 type="submit"
                 disabled={formState.status === "loading"}
-                className="w-full text-base font-semibold py-3 flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full text-base font-semibold py-3 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {formState.status === "loading" ? (
                   <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>

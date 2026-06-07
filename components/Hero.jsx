@@ -1,18 +1,89 @@
 "use client";
 import { Github, Linkedin, Mail, Phone, ArrowRight, Globe, Smartphone, Server, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 
-const SocialLink = memo(({ href, icon, title, className }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className={className} title={title}>
+/* ── Typewriter hook ─────────────────────────────────────────── */
+const PHRASES = [
+  "Available for projects — Nairobi, Kenya",
+  "Building your digital future",
+  "Web · Mobile · Backend · AI",
+  "Remote-friendly · Africa & Beyond",
+  "Turning ideas into shipped products",
+  "Let's build something great",
+];
+
+function useTypewriter(phrases, typeSpeed = 65, deleteSpeed = 32, pauseMs = 2400) {
+  const [display, setDisplay] = useState("");
+  const phraseIdx = useRef(0);
+  const charIdx = useRef(0);
+  const deleting = useRef(false);
+
+  useEffect(() => {
+    let timer;
+    function tick() {
+      const phrase = phrases[phraseIdx.current];
+      if (!deleting.current) {
+        if (charIdx.current < phrase.length) {
+          charIdx.current++;
+          setDisplay(phrase.slice(0, charIdx.current));
+          timer = setTimeout(tick, typeSpeed);
+        } else {
+          timer = setTimeout(() => { deleting.current = true; tick(); }, pauseMs);
+        }
+      } else {
+        if (charIdx.current > 0) {
+          charIdx.current--;
+          setDisplay(phrase.slice(0, charIdx.current));
+          timer = setTimeout(tick, deleteSpeed);
+        } else {
+          deleting.current = false;
+          phraseIdx.current = (phraseIdx.current + 1) % phrases.length;
+          timer = setTimeout(tick, 300);
+        }
+      }
+    }
+    tick();
+    return () => clearTimeout(timer);
+  }, []); // eslint-disable-line
+
+  return display;
+}
+
+/* ── TypewriterBadge ─────────────────────────────────────────── */
+const TypewriterBadge = memo(function TypewriterBadge() {
+  const text = useTypewriter(PHRASES);
+  return (
+    <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full skeu-badge mb-5">
+      <span className="relative flex h-2.5 w-2.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+      </span>
+      <span className="text-sm font-bold tracking-wide min-w-[260px]">
+        {text}
+        <span className="tw-cursor" />
+      </span>
+    </div>
+  );
+});
+
+/* ── Other sub-components ────────────────────────────────────── */
+const SocialLink = memo(({ href, icon, title }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="skeu-icon-btn w-11 h-11 flex items-center justify-center rounded-xl text-muted-foreground hover:text-primary"
+    title={title}
+  >
     {icon}
   </a>
 ));
 SocialLink.displayName = "SocialLink";
 
 const Tag = memo(({ tag }) => (
-  <span className="px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 dark:bg-primary/20 text-primary border border-primary/20 dark:border-primary/30 hover:bg-primary/20 transition-all">
+  <span className="skeu-badge px-4 py-1.5 rounded-full text-xs hover:scale-105 transition-transform cursor-default">
     {tag}
   </span>
 ));
@@ -39,25 +110,20 @@ const TAGS = [
 ];
 
 const STATS = [
-  { icon: Globe, value: "10+", label: "Projects Delivered" },
+  { icon: Globe, value: "10+", label: "Projects" },
   { icon: Smartphone, value: "3+", label: "Mobile Apps" },
-  { icon: Server, value: "5+", label: "Backend Systems" },
-  { icon: Zap, value: "100%", label: "Client Satisfaction" },
+  { icon: Server, value: "5+", label: "Backends" },
+  { icon: Zap, value: "100%", label: "Satisfaction" },
 ];
 
+/* ── Hero ────────────────────────────────────────────────────── */
 export default memo(function Hero() {
-  const socialLinksElements = useMemo(() =>
+  const socialLinks = useMemo(() =>
     SOCIAL_LINKS.map(({ href, icon, title }) => (
-      <SocialLink
-        key={title}
-        href={href}
-        icon={icon}
-        title={title}
-        className="w-11 h-11 flex items-center justify-center rounded-xl border border-border bg-card text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 hover:scale-105 transition-all"
-      />
+      <SocialLink key={title} href={href} icon={icon} title={title} />
     )), []);
 
-  const tagElements = useMemo(() => TAGS.map((tag) => <Tag key={tag} tag={tag} />), []);
+  const tags = useMemo(() => TAGS.map((t) => <Tag key={t} tag={t} />), []);
 
   return (
     <motion.div
@@ -66,7 +132,6 @@ export default memo(function Hero() {
       transition={{ duration: 0.6 }}
       className="w-full"
     >
-      {/* HERO SECTION */}
       <div className="w-full min-h-[85vh] flex items-center justify-center px-4 py-16">
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full max-w-6xl">
 
@@ -77,14 +142,9 @@ export default memo(function Hero() {
             transition={{ duration: 0.7 }}
             className="flex-1 flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-5">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <span className="text-sm font-semibold text-primary uppercase tracking-wide">
-                Available for Projects — Nairobi, Kenya
-              </span>
-            </div>
+            <TypewriterBadge />
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-black dark:text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-foreground">
               We Build{" "}
               <span className="bg-gradient-to-r from-[#D97706] via-[#DC2626] to-[#065F46] bg-clip-text text-transparent">
                 Digital Products
@@ -99,29 +159,30 @@ export default memo(function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-2 mb-7 justify-center md:justify-start">
-              {tagElements}
+              {tags}
             </div>
 
             <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-6">
               <Link
                 href="/portfolio"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-base shadow-md hover:shadow-lg hover:bg-primary/90 transition-all duration-200 hover:scale-[1.02]"
+                className="skeu-btn-primary inline-flex items-center gap-2 px-6 py-3 text-base"
               >
                 View Our Work <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-card text-foreground font-semibold text-base hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 hover:scale-[1.02]"
+                className="skeu-btn-outline inline-flex items-center gap-2 px-6 py-3 text-base"
               >
                 Get a Quote
               </Link>
             </div>
 
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              {socialLinksElements}
+              {socialLinks}
             </div>
           </motion.div>
 
+          {/* Right — Image + Stats */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -130,11 +191,24 @@ export default memo(function Hero() {
           >
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-[#F28482] rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
-              <img
-                src="/assets/hero.png"
-                alt="Gatungo Digital Hero"
-                className="relative rounded-2xl shadow-2xl border border-white/20 object-cover w-full h-auto transform hover:scale-[1.02] transition-transform duration-500"
-              />
+              <div className="relative skeu-card overflow-hidden">
+                <img
+                  src="/assets/hero.png"
+                  alt="Gatungo Digital Hero"
+                  className="w-full h-auto transform hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-4 gap-3 mt-4">
+              {STATS.map(({ icon: Icon, value, label }) => (
+                <div key={label} className="skeu-stat-card rounded-xl p-3 flex flex-col items-center text-center gap-1">
+                  <Icon className="w-4 h-4 text-primary" />
+                  <span className="text-lg font-extrabold text-foreground leading-none">{value}</span>
+                  <span className="text-[10px] text-muted-foreground leading-tight">{label}</span>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>

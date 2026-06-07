@@ -18,27 +18,23 @@ const itemVariants = {
 const PricingCard = memo(({ tier }) => (
   <motion.div
     variants={itemVariants}
-    className={`relative flex flex-col p-8 rounded-2xl border ${
-      tier.recommended
-        ? "bg-card border-primary shadow-xl scale-105 z-10"
-        : "bg-white/90 dark:bg-neutral-900/80 border-border shadow-sm"
-    } card-interactive`}
+    className={`relative flex flex-col p-8 skeu-card ${tier.recommended ? "scale-105 z-10" : ""}`}
   >
     {tier.recommended && (
-      <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full uppercase tracking-widest">
+      <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 skeu-btn-primary text-xs font-bold rounded-full uppercase tracking-widest">
         Recommended
       </div>
     )}
     <div className="mb-6">
-      <h3 className="text-xl font-bold text-black dark:text-white mb-2">{tier.plan}</h3>
+      <h3 className="text-xl font-bold text-foreground mb-2">{tier.plan}</h3>
       <div className="flex items-baseline gap-1">
-        <span className="text-3xl font-extrabold text-black dark:text-white">{tier.price}</span>
+        <span className="text-3xl font-extrabold text-foreground">{tier.price}</span>
       </div>
-      <p className="text-sm text-black dark:text-neutral-200 mt-2">{tier.desc}</p>
+      <p className="text-sm text-muted-foreground mt-2">{tier.desc}</p>
     </div>
     <ul className="space-y-3 mb-8 flex-grow">
       {tier.features.map((feature, i) => (
-        <li key={i} className="flex items-start gap-3 text-sm text-neutral-900 dark:text-neutral-300">
+        <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
           <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
           <span>{feature}</span>
         </li>
@@ -66,12 +62,12 @@ export default memo(function Pricing() {
         className="flex flex-col items-center max-w-6xl mx-auto"
       >
         <motion.div variants={itemVariants} className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
-            <Zap className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">Investment</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full skeu-badge mb-4">
+            <Zap className="w-4 h-4" />
+            <span className="text-sm font-semibold uppercase tracking-wide">Investment</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-black dark:text-white">Pricing Plans</h2>
-          <p className="text-lg text-neutral-700 dark:text-neutral-200 max-w-2xl">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">Pricing Plans</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl">
             Transparent pricing for businesses of all sizes. Choose the plan that fits your current needs and scale as you grow.
           </p>
         </motion.div>

@@ -3,26 +3,23 @@ import React, { memo } from "react";
 
 const StaticBackground = memo(({ theme }) => {
   const lightStyles = {
-    backgroundColor: "hsl(32, 54%, 93%)", // F7EDE2
+    backgroundColor: "hsl(35, 42%, 90%)",
     backgroundImage: `
-      radial-gradient(ellipse at 10% 10%, hsla(37, 91%, 67%, 0.2), transparent),
-      radial-gradient(ellipse at 90% 90%, hsla(1, 80%, 73%, 0.15), transparent),
-      radial-gradient(ellipse at 50% 50%, hsla(166, 16%, 58%, 0.1), transparent),
-      linear-gradient(hsla(32, 20%, 80%, 0.3) 1.5px, transparent 1.5px),
-      linear-gradient(to right, hsla(32, 20%, 80%, 0.3) 1.5px, transparent 1.5px)
+      radial-gradient(ellipse 70% 55% at 12% 12%, hsla(37, 91%, 72%, 0.32), transparent),
+      radial-gradient(ellipse 60% 50% at 88% 88%, hsla(1, 80%, 72%, 0.22), transparent),
+      radial-gradient(ellipse 50% 60% at 50% 50%, hsla(166, 20%, 68%, 0.12), transparent),
+      radial-gradient(ellipse 40% 30% at 80% 20%, hsla(37, 70%, 85%, 0.3), transparent)
     `,
-    backgroundSize: "100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px",
   };
 
   const darkStyles = {
-    backgroundColor: "hsl(222, 47%, 6%)",
+    backgroundColor: "hsl(222, 47%, 5%)",
     backgroundImage: `
-      radial-gradient(ellipse at 10% 10%, hsla(37, 91%, 67%, 0.15), transparent),
-      radial-gradient(ellipse at 90% 90%, hsla(1, 80%, 73%, 0.1), transparent),
-      linear-gradient(hsla(222, 47%, 10%, 1) 1.5px, transparent 1.5px),
-      linear-gradient(to right, hsla(222, 47%, 10%, 1) 1.5px, transparent 1.5px)
+      radial-gradient(ellipse 65% 50% at 12% 12%, hsla(37, 70%, 18%, 0.45), transparent),
+      radial-gradient(ellipse 55% 45% at 88% 88%, hsla(1, 70%, 18%, 0.3), transparent),
+      radial-gradient(ellipse 45% 55% at 50% 50%, hsla(222, 47%, 14%, 0.55), transparent),
+      radial-gradient(ellipse 35% 28% at 75% 18%, hsla(222, 60%, 10%, 0.4), transparent)
     `,
-    backgroundSize: "100% 100%, 100% 100%, 40px 40px, 40px 40px",
   };
 
   return (

@@ -8,6 +8,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Jengeame | Full-Stack Agency",
   description: "Jengeame — a full-stack digital agency delivering scalable web, mobile, and backend solutions for businesses across Africa and beyond.",
+  icons: {
+    icon: "/assets/logo.jpeg",
+    shortcut: "/assets/logo.jpeg",
+    apple: "/assets/logo.jpeg",
+  },
 };
 
 export default function RootLayout({

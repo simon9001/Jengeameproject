@@ -46,8 +46,8 @@ const ProcessStep = memo(({ step, isLast }) => {
   return (
     <motion.div variants={itemVariants} className="flex gap-4">
       <div className="flex flex-col items-center">
-        <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-md flex-shrink-0">
-          <Icon className="w-5 h-5 text-primary-foreground" />
+        <div className="w-12 h-12 rounded-xl skeu-icon-box flex items-center justify-center flex-shrink-0 text-primary">
+          <Icon className="w-5 h-5" />
         </div>
         {!isLast && <div className="w-0.5 bg-border flex-grow mt-2 mb-0 min-h-[2rem]" />}
       </div>
@@ -55,8 +55,8 @@ const ProcessStep = memo(({ step, isLast }) => {
         <div className="flex items-center gap-2 mb-1">
           <span className="text-xs font-bold text-primary uppercase tracking-widest">{step.step}</span>
         </div>
-        <h4 className="text-lg font-bold text-black dark:text-white mb-1">{step.title}</h4>
-        <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">{step.description}</p>
+        <h4 className="text-lg font-bold text-foreground mb-1">{step.title}</h4>
+        <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
       </div>
     </motion.div>
   );
@@ -79,11 +79,11 @@ const Process = memo(function Process() {
       >
         {/* Header */}
         <motion.div variants={itemVariants} className="flex flex-col items-center text-center max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
-            <GitBranch className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">How We Work</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full skeu-badge mb-4">
+            <GitBranch className="w-4 h-4" />
+            <span className="text-sm font-semibold uppercase tracking-wide">How We Work</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-black dark:text-white">Our Process</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">Our Process</h2>
           <p className="text-lg text-muted-foreground">
             A structured, transparent workflow that keeps you informed at every stage — from first conversation to final deployment.
           </p>
@@ -91,18 +91,18 @@ const Process = memo(function Process() {
 
         <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Process Steps */}
-          <motion.div variants={itemVariants} className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-8">
-            <h3 className="text-xl font-bold text-black dark:text-white mb-6">6-Step Delivery Framework</h3>
+          <motion.div variants={itemVariants} className="skeu-card p-8">
+            <h3 className="text-xl font-bold text-foreground mb-6">6-Step Delivery Framework</h3>
             <div>{processSteps}</div>
           </motion.div>
 
           <div className="flex flex-col gap-6">
             {/* Why Us */}
-            <motion.div variants={itemVariants} className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6">
-              <h3 className="text-xl font-bold text-black dark:text-white mb-4">Why Choose Us?</h3>
+            <motion.div variants={itemVariants} className="skeu-card p-6">
+              <h3 className="text-xl font-bold text-foreground mb-4">Why Choose Us?</h3>
               <ul className="space-y-2">
                 {WHY_US.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                     <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
@@ -111,13 +111,13 @@ const Process = memo(function Process() {
             </motion.div>
 
             {/* Tech Stack */}
-            <motion.div variants={itemVariants} className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6">
-              <h3 className="text-xl font-bold text-black dark:text-white mb-4">Our Tech Stack</h3>
+            <motion.div variants={itemVariants} className="skeu-card p-6">
+              <h3 className="text-xl font-bold text-foreground mb-4">Our Tech Stack</h3>
               <div className="grid grid-cols-3 gap-3">
                 {TECH_STACK.map((tech) => (
-                  <div key={tech.name} className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-muted/50 border border-border/50 hover:border-primary/30 transition-colors">
+                  <div key={tech.name} className="skeu-tech-tile flex flex-col items-center gap-1.5 p-3 rounded-xl">
                     <img src={tech.logo} alt={tech.name} className="w-8 h-8 object-contain" loading="lazy" />
-                    <span className="text-xs text-neutral-600 dark:text-neutral-300 text-center leading-tight">{tech.name}</span>
+                    <span className="text-xs text-muted-foreground text-center leading-tight">{tech.name}</span>
                   </div>
                 ))}
               </div>

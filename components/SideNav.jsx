@@ -113,7 +113,7 @@ const SideNav = memo(({ open, onClose }) => {
         initial={false}
         animate={open ? "open" : "closed"}
         variants={navVariants}
-        className="side-nav-panel fixed top-0 right-0 w-[270px] h-screen bg-card shadow-lg z-50 flex flex-col p-6 pt-8"
+        className="side-nav-panel fixed top-0 right-0 w-[270px] h-screen skeu-sidenav z-50 flex flex-col p-6 pt-8 rounded-l-2xl"
         aria-label="Main Navigation"
         style={{ willChange: "transform, opacity", transform: "translate3d(0,0,0)" }}
       >

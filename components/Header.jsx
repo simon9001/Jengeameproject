@@ -1,7 +1,7 @@
 "use client";
 import React, { memo, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Sun, Moon, Menu, Zap } from "lucide-react";
+import { Sun, Moon, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -41,17 +41,16 @@ const Header = memo(({ toggleTheme, currentTheme, onHamburgerClick }) => {
       variants={headerVariants}
       initial="hidden"
       animate="visible"
-      className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 sm:px-8 py-4 bg-muted/70 dark:bg-muted/50 backdrop-blur-md shadow-md border-b border-border/40"
+      className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 sm:px-8 py-4 skeu-header"
       style={{ willChange: "transform", transform: "translate3d(0,0,0)" }}
     >
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-2 select-none hover:opacity-80 transition">
-        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-md">
-          <Zap className="w-4 h-4 text-primary-foreground" />
-        </div>
-        <span className="text-xl sm:text-2xl font-extrabold text-primary tracking-wide">
-          Jenge<span className="text-foreground">ame</span>
-        </span>
+      <Link href="/" className="select-none hover:opacity-90 transition-opacity">
+        <img
+          src="/assets/logo.jpeg"
+          alt="jengeaMe"
+          className="h-10 w-auto rounded-xl object-contain"
+        />
       </Link>
 
       {/* Desktop Nav */}
@@ -86,7 +85,7 @@ const Header = memo(({ toggleTheme, currentTheme, onHamburgerClick }) => {
 
         <Link
           href="/contact"
-          className="ml-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-md"
+          className="ml-2 skeu-btn-primary px-4 py-2 text-sm"
         >
           Get a Quote
         </Link>
