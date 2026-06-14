@@ -62,15 +62,27 @@ const Footer = memo(() => {
                 Nairobi, Kenya
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <a href="tel:+254757568845" className="hover:text-primary transition-colors">+254 0757 568845</a>
-              </li>
+  <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+  <div className="flex flex-col">
+    <a href="tel:+254757568845" className="hover:text-primary transition-colors">
+      +254 757 568845
+    </a>
+    <a href="tel:+254713515437" className="hover:text-primary transition-colors">
+      +254 713 515437
+    </a>
+  </div>
+</li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                <a href="mailto:simongatungo300@gmail.com" className="hover:text-primary transition-colors">
-                  simongatungo300@gmail.com
-                </a>
-              </li>
+  <Mail className="w-4 h-4 text-primary flex-shrink-0" />
+  <div className="flex flex-col">
+    <a href="mailto:simongatungo300@gmail.com" className="hover:text-primary transition-colors">
+      simongatungo300@gmail.com
+    </a>
+    <a href="mailto:antonyochieng00@gmail.com" className="hover:text-primary transition-colors">
+      antonyochieng00@gmail.com
+    </a>
+  </div>
+</li>
             </ul>
           </div>
         </div>

@@ -62,7 +62,7 @@ function Contact() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("https://formspree.io/f/xnjvypqj", {
+      const response = await fetch("https://formspree.io/f/mwvjabqn", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
