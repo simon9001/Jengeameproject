@@ -46,11 +46,37 @@ const StatusMessage = ({ status, message }) => {
 
 const CONTACT_INFO = [
   { icon: MapPin, label: "Location", value: "Nairobi, Kenya" },
-  { icon: Phone, label: "Phone", value: "+254 0757 568845", href: "tel:+254757568845" },
-  { icon: Mail, label: "Email", value: "simongatungo300@gmail.com", href: "mailto:simongatungo300@gmail.com" },
+
+  // Phones
+  {
+    icon: Phone,
+    label: "Phone 1",
+    value: "+254 757 568845",
+    href: "tel:+254757568845",
+  },
+  {
+    icon: Phone,
+    label: "Phone 2",
+    value: "+254 713 515437",
+    href: "tel:+254713515437",
+  },
+
+  // Emails
+  {
+    icon: Mail,
+    label: "Email 1",
+    value: "simongatungo300@gmail.com",
+    href: "mailto:simongatungo300@gmail.com",
+  },
+  {
+    icon: Mail,
+    label: "Email 2",
+    value: "antonyochieng00@gmail.com",
+    href: "mailto:antonyochieng00@gmail.com",
+  },
+
   { icon: Clock, label: "Response Time", value: "Within 24 hours" },
 ];
-
 function Contact() {
   const [formState, setFormState] = useState({ status: "idle", message: "" });
 
@@ -122,7 +148,7 @@ function Contact() {
 
             <div className="skeu-card p-4">
               <p className="text-sm text-primary font-medium">
-                🌍 Serving clients across Kenya, Africa, and globally — remote-friendly, deadline-driven.
+                Serving clients across Kenya, Africa, and globally remote-friendly, deadline-driven.
               </p>
             </div>
           </motion.div>
@@ -159,7 +185,10 @@ function Contact() {
                   name="service"
                   required
                   disabled={formState.status === "loading"}
-                  className="flex h-10 w-full rounded-lg skeu-input px-3 py-2 text-sm disabled:opacity-50"
+                  className="flex h-10 w-full rounded-lg skeu-input px-3 py-2 text-sm 
+text-foreground bg-background 
+dark:text-foreground dark:bg-background 
+disabled:opacity-50"
                 >
                   <option value="">Select a service...</option>
                   <option value="Web Development">Web Development</option>
@@ -177,13 +206,16 @@ function Contact() {
                 <select
                   name="budget"
                   disabled={formState.status === "loading"}
-                  className="flex h-10 w-full rounded-lg skeu-input px-3 py-2 text-sm disabled:opacity-50"
+                  className="flex h-10 w-full rounded-lg skeu-input px-3 py-2 text-sm 
+text-foreground bg-background 
+dark:text-foreground dark:bg-background 
+disabled:opacity-50"
                 >
                   <option value="">Select budget range...</option>
-                  <option value="Under $500">Under $500</option>
-                  <option value="$500 – $2,000">$500 – $2,000</option>
-                  <option value="$2,000 – $10,000">$2,000 – $10,000</option>
-                  <option value="$10,000+">$10,000+</option>
+                  <option value="Under 15000">Under kes15000</option>
+                  <option value="kes15000 – kes30000">kes15000 – kes30000</option>
+                  <option value="kes30000 – kes50000">kes30000 – kes50000</option>
+                  <option value="kes50000+">kes50000+</option>
                   <option value="Let's discuss">Let&apos;s discuss</option>
                 </select>
               </motion.div>
