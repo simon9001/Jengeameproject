@@ -44,15 +44,16 @@ const Header = memo(({ toggleTheme, currentTheme, onHamburgerClick }) => {
       className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 sm:px-8 py-4 skeu-header"
       style={{ willChange: "transform", transform: "translate3d(0,0,0)" }}
     >
-      {/* Logo */}
-      <Link href="/" className="select-none hover:opacity-90 transition-opacity">
-      
+      {/* Logo + Brand Name */}
+      <Link href="/" className="select-none hover:opacity-90 transition-opacity flex items-center gap-2.5">
         <img
           src="/assets/logo.jpeg"
-          alt="jengeaMe"
-          className="h-10 w-auto rounded-xl object-contain"
+          alt="Jengeame"
+          className="h-9 w-auto rounded-xl object-contain"
         />
-        
+        <span className="font-extrabold text-lg tracking-tight text-foreground">
+          Jengea<span className="bg-gradient-to-r from-[#D97706] via-[#DC2626] to-[#065F46] bg-clip-text text-transparent">Me</span>
+        </span>
       </Link>
 
       {/* Desktop Nav */}
