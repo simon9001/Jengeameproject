@@ -1,6 +1,6 @@
 "use client";
 import React, { memo, useState, useCallback } from "react";
-import { Code, ExternalLink, FolderKanban, ArrowRight, Globe } from "lucide-react";
+import { Code, FolderKanban, ArrowRight, Globe, Monitor, Smartphone } from "lucide-react";
 import { motion } from "framer-motion";
 import { PROJECTS } from "@/lib/data";
 import Link from "next/link";
@@ -15,7 +15,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-/* Category gradient covers (used when no project.image is provided) */
+/* Fallback gradient covers for projects without images */
 const COVER_GRADIENT = {
   "Property Tech":        "linear-gradient(135deg, #f59e0b 0%, #b45309 45%, #7c2d12 100%)",
   "Management System":    "linear-gradient(135deg, #34d399 0%, #059669 45%, #064e3b 100%)",
@@ -31,7 +31,7 @@ const DEFAULT_COVER = "linear-gradient(135deg, #f59e0b 0%, #78350f 100%)";
 const ProjectCard = memo(({ project }) => {
   const [active, setActive] = useState(false);
   const cover = COVER_GRADIENT[project.category] ?? DEFAULT_COVER;
-  const hasImage = Boolean(project.image);
+  const hasDualImages = Boolean(project.desktopImage && project.mobileImage);
 
   const show = useCallback(() => setActive(true), []);
   const hide = useCallback(() => setActive(false), []);
@@ -42,24 +42,44 @@ const ProjectCard = memo(({ project }) => {
   return (
     <motion.div
       variants={itemVariants}
-      className="relative overflow-hidden rounded-2xl cursor-pointer"
-      style={{ aspectRatio: "4/3" }}
+      className="relative overflow-hidden rounded-2xl cursor-pointer skeu-card flex flex-col"
       onMouseEnter={show}
       onMouseLeave={hide}
       onPointerUp={onPointerUp}
     >
-      {/* ── Cover: real screenshot OR gradient ── */}
-      {hasImage ? (
-        <img
-          src={project.image}
-          alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-          style={{ transform: active ? "scale(1.06)" : "scale(1)" }}
-        />
+      {/* ── Images: desktop + mobile side by side ── */}
+      {hasDualImages ? (
+        <div className="flex gap-2 p-2.5 h-52 shrink-0 bg-muted/20">
+          {/* Desktop screenshot */}
+          <div className="relative flex-[3] rounded-xl overflow-hidden border border-border/40 shadow-sm">
+            <img
+              src={project.desktopImage}
+              alt={`${project.title} — desktop`}
+              className="w-full h-full object-cover object-top"
+            />
+            <div className="absolute top-1.5 left-2 flex items-center gap-1 bg-black/55 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
+              <Monitor className="w-2.5 h-2.5 text-white/80" />
+              <span className="text-[9px] text-white/80 font-semibold">Desktop</span>
+            </div>
+          </div>
+
+          {/* Mobile screenshot */}
+          <div className="relative flex-[1.4] rounded-xl overflow-hidden border border-border/40 shadow-sm">
+            <img
+              src={project.mobileImage}
+              alt={`${project.title} — mobile`}
+              className="w-full h-full object-cover object-top"
+            />
+            <div className="absolute top-1.5 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-black/55 backdrop-blur-sm px-1.5 py-0.5 rounded-full whitespace-nowrap">
+              <Smartphone className="w-2.5 h-2.5 text-white/80" />
+              <span className="text-[9px] text-white/80 font-semibold">Mobile</span>
+            </div>
+          </div>
+        </div>
       ) : (
-        <>
+        /* Fallback: gradient cover */
+        <div className="relative h-52 shrink-0">
           <div className="absolute inset-0" style={{ background: cover }} />
-          {/* Dot-grid pattern */}
           <div
             className="absolute inset-0 opacity-[0.07]"
             style={{
@@ -67,44 +87,34 @@ const ProjectCard = memo(({ project }) => {
               backgroundSize: "22px 22px",
             }}
           />
-        </>
+        </div>
       )}
 
-      {/* Always-on bottom gradient for text readability */}
-      <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent" />
-
-      {/* ── Default state: title + category ── */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 p-4"
-        animate={{ opacity: active ? 0 : 1, y: active ? 8 : 0 }}
-        transition={{ duration: 0.2 }}
-      >
+      {/* ── Card info ── */}
+      <div className="p-4 flex flex-col gap-1">
         {project.category && (
-          <span className="skeu-badge inline-block px-2.5 py-0.5 rounded-full text-[10px] mb-1.5 w-fit">
+          <span className="skeu-badge inline-block px-2.5 py-0.5 rounded-full text-[10px] w-fit">
             {project.category}
           </span>
         )}
-        <h3 className="text-white font-bold text-lg leading-tight drop-shadow-lg">
-          {project.title}
-        </h3>
-        {/* Live indicator */}
+        <h3 className="text-foreground font-bold text-lg leading-tight">{project.title}</h3>
         {project.links[0]?.type === "live" && (
-          <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-semibold text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-500 dark:text-emerald-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
             Live site
           </span>
         )}
-      </motion.div>
+      </div>
 
-      {/* ── Hover overlay: full details ── */}
+      {/* ── Hover overlay: full project details ── */}
       <motion.div
-        className="absolute inset-0 flex flex-col justify-between p-5"
-        style={{ background: "rgba(0,0,0,0.90)" }}
+        className="absolute inset-0 flex flex-col justify-between p-5 z-20"
+        style={{ background: "rgba(0,0,0,0.92)" }}
         initial={false}
         animate={{ opacity: active ? 1 : 0, y: active ? "0%" : "100%" }}
         transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* jengeaMe logo watermark — top right */}
+        {/* Logo watermark */}
         <div className="absolute top-3 right-3 opacity-70">
           <img
             src="/assets/logo.jpeg"
@@ -125,7 +135,7 @@ const ProjectCard = memo(({ project }) => {
           <p className="text-neutral-300 text-sm leading-relaxed line-clamp-4">{project.desc}</p>
         </div>
 
-        {/* Bottom: tags + link */}
+        {/* Bottom: tags + links */}
         <div>
           <div className="flex flex-wrap gap-1.5 mb-4">
             {project.tags.map((tag, i) => (

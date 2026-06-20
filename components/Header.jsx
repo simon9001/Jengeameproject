@@ -46,11 +46,13 @@ const Header = memo(({ toggleTheme, currentTheme, onHamburgerClick }) => {
     >
       {/* Logo */}
       <Link href="/" className="select-none hover:opacity-90 transition-opacity">
+      
         <img
           src="/assets/logo.jpeg"
           alt="jengeaMe"
           className="h-10 w-auto rounded-xl object-contain"
         />
+        
       </Link>
 
       {/* Desktop Nav */}
